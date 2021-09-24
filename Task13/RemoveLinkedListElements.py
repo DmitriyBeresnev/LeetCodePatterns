@@ -1,6 +1,6 @@
 
 
-# 203. Remove Linked List Elements
+# LeetCode Patterns. Task 13. LeetCode 203. Remove Linked List Elements
 
 '''
 
@@ -62,7 +62,29 @@ class ListNode:
 
 # my solution
 class Solution:
-    pass
+    def removeElement(self, prev: ListNode, curr: ListNode) -> ListNode:
+        if prev.next == curr.next and prev.val == curr.val:
+            return curr.next
+        prev.next = curr.next
+
+    def removeElements(self, head: ListNode, val: int) -> ListNode:
+        curr = head
+        prev = head
+        while curr is not None:
+            isElementDeleted = False
+            if head is not None:
+                if head.val == val:
+                    head = self.removeElement(prev, head)
+                    curr = head
+                    prev = head
+                    continue
+            if curr.val == val:
+                self.removeElement(prev, curr)
+                isElementDeleted = True
+            if not isElementDeleted:
+                prev = curr
+            curr = curr.next
+        return head
 
 
 # solution after Vlad's tips (Vlad's solution)
@@ -74,7 +96,11 @@ if __name__ == "__main__":
     #
     start = time.perf_counter()
     solution = Solution()
-    print(solution.countBits(n = 2)) # 6
+    head = ListNode(1)
+    head.next = ListNode(2)
+    head.next.next = ListNode(2)
+    head.next.next.next = ListNode(1)
+    print(solution.removeElements(head, val=2)) # 6
     end = time.perf_counter()
     print(f"test 1: {end - start:10.6f} sec")
     #
