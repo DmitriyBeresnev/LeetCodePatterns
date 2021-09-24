@@ -1,6 +1,6 @@
 
 
-#
+# LeetCode Patterns. Task 14. LeetCode 203. Remove Linked List Elements
 
 '''
 

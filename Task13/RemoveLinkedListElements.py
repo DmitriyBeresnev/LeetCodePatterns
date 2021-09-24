@@ -89,7 +89,19 @@ class Solution:
 
 # solution after Vlad's tips (Vlad's solution)
 class Solution2:
-    pass
+    def removeElements(self, head: ListNode, val: int) -> ListNode:
+        result = ListNode(0)
+        result.next = head
+
+        current = result
+
+        while current.next:
+            if current.next.val == val:
+                current.next = current.next.next
+            else:
+                current = current.next
+
+        return result.next
 
 
 if __name__ == "__main__":
